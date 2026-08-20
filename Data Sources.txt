@@ -1,0 +1,59 @@
+DATA SOURCES
+
+This project combines data from two primary sources: IMDb official datasets and The Movie Database (TMDB) API.
+
+------------------------------------------------------------
+IMDb OFFICIAL DATASETS
+------------------------------------------------------------
+Source: https://datasets.imdbws.com/
+Access Method: Bulk download of publicly available TSV files (non-commercial use)
+
+Files Used:
+- title.basics.tsv:
+  Movie identifier (tconst), title, release year, and genre
+
+- title.principals.tsv:
+  Mapping between movies and individuals (actors, directors, etc.)
+
+- name.basics.tsv:
+  Individual identifiers and names
+
+- title.ratings.tsv:
+  IMDb average rating and number of votes
+
+------------------------------------------------------------
+TMDB (THE MOVIE DATABASE) API
+------------------------------------------------------------
+Source: https://www.themoviedb.org/
+Access Method: REST API accessed via Python scripts
+
+Data Collection Method:
+- Movies were retrieved year-by-year using the TMDB "discover/movie" endpoint
+- For each movie, additional details were collected using the "movie/{id}" endpoint
+- The process was repeated for each year between 2000 and 2025
+
+Key Implementation Details:
+- Movies were sorted by revenue to prioritize records with complete financial data
+- A maximum number of movies per year was optionally applied to control runtime
+- Requests were rate-limited (0.25s delay) to comply with API usage policies
+- Data was saved incrementally in batches to avoid data loss
+- A checkpoint system (processed_ids) was used to track progress and enable resuming
+- Only movies with valid budget, revenue, and IMDb ID were retained
+
+Data Retrieved from TMDB:
+- IMDb ID (used for merging with IMDb datasets)
+- Production budget
+- Box office revenue
+
+------------------------------------------------------------
+DATA INTEGRATION
+------------------------------------------------------------
+- IMDb and TMDB datasets were merged using IMDb IDs
+
+------------------------------------------------------------
+NOTES AND LIMITATIONS
+------------------------------------------------------------
+- Data is used strictly for academic, non-commercial purposes
+- TMDB financial data may be incomplete or missing for some films
+- Box office revenue does not include streaming revenue
+- External factors (marketing, release strategy, competition) are not captured
