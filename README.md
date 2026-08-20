@@ -251,11 +251,7 @@ The application transforms the project from a traditional machine learning analy
 ## Project Structure
 
 ```text
-MovieSuccessProject/
-│
-├── notebooks/
-│   ├── EDA.ipynb
-│   └── Modeling.ipynb
+Movie-Success-Prediction/
 │
 ├── app/
 │   ├── app.py
@@ -275,9 +271,16 @@ MovieSuccessProject/
 │   ├── app_home.png
 │   └── scenario_comparison.png
 │
-├── Data Sources.txt
-├── requirements.txt
-└── README.md
+├── notebooks/
+│   ├── EDA.ipynb
+│   └── Modeling.ipynb
+│
+├── report/
+│   └── Movie_Success_Prediction_Report.pdf
+│
+├── data_sources.txt
+├── README.md
+└── requirements.txt
 ```
 
 > **Note:** Large source datasets may be excluded from the GitHub repository because of file-size or redistribution restrictions. See `Data Sources.txt` for information about the original data sources.
